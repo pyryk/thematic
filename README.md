@@ -17,4 +17,4 @@ Use the following to start developing geoviz-framework. Node.js, npm, ruby and b
 
 ## Thanks
 
-The build system configuration and structure are based on [gulp-starter](https://github.com/greypants/gulp-starter), licensed under the MIT license (see LICENSE.md for further details).
+The build system configuration and structure are based on [gulp-starter](https://github.com/greypants/gulp-starter) by [Dan Tello](https://github.com/greypants), licensed under the MIT license (see LICENSE.md for further details).
