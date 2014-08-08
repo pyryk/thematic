@@ -1,5 +1,6 @@
 # geoviz-framework
 
+A framework for visualizing geographical data in the web. This is created as a result of my [master's thesis](https://github.com/pyryk/thesis). Under construction, not suitable for production (or any) use yet.
 
 ## License
 
