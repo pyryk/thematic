@@ -8,7 +8,20 @@
   },
   "browser": {
     "underscore": "backbone/node_modules/underscore",
-    "plugin": "./src/javascript/vendor/jquery-plugin.js"
+    "plugin": "./src/javascript/vendor/jquery-plugin.js",
+    "heatmap": "./src/javascript/lib/heatmap.js",
+    "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
+    "d3-contour": "./src/javascript/lib/d3.geom.contour.js",
+    "vizframe": "./src/javascript/vizframe/vizframe.js",
+    "vizframe-heatmap": "./src/javascript/vizframe/modules/heatmap.js",
+    "vizframe-isarithmic": "./src/javascript/vizframe/modules/isarithmic.js",
+    "vizframe-contour": "./src/javascript/vizframe/modules/contour.js",
+    "vizframe-dot-choropleth": "./src/javascript/vizframe/modules/dot-choropleth.js",
+    "vizframe-dot-choropleth-aggregate": "./src/javascript/vizframe/modules/dot-choropleth-aggregate.js",
+    "vizframe-dot": "./src/javascript/vizframe/modules/dot.js",
+    "vizframe-choropleth": "./src/javascript/vizframe/modules/choropleth.js",
+    "average-aggregator": "./src/javascript/vizframe/utils/average-aggregator.js",
+    "converters": "./src/javascript/vizframe/utils/converters.js"
   },
   "browserify": {
     "transform": [
@@ -22,6 +35,25 @@
       "exports": "plugin",
       "depends": [
         "jquery:$"
+      ]
+    },
+    "heatmap": {
+      "exports": "h337",
+      "depends": [
+        "leaflet:L"
+      ]
+    },
+    "leaflet-heatmap": {
+      "exports": "HeatmapOverlay",
+      "depends": [
+        "leaflet:L",
+        "heatmap:h337"
+      ]
+    },
+    "d3-contour": {
+      "exports": "d3",
+      "depends": [
+        "d3:d3"
       ]
     }
   },
@@ -45,7 +77,10 @@
   },
   "dependencies": {
     "backbone": "~1.1.2",
+    "d3": "^3.4.11",
     "jquery": "~2.1.0",
-    "leaflet": "^0.7.3"
+    "leaflet": "^0.7.3",
+    "q": "^1.0.1",
+    "turf": "^1.0.0"
   }
 }
