@@ -12,13 +12,17 @@ var defaults = {
 	}
 }
 
-function init(opts) {
+function Dot(opts) {
 
 	var opts = _.defaults(opts || {}, defaults);
 
 	this.isVizFrameModule = true;
-	this.addTo = function(vizframe) {
+	this.status = 'loading';
+
+	this.addTo = function(id, vizframe) {
+		this.vizframe = vizframe;
 		this.map = vizframe.map;
+		this.id = id;
 		this.show();
 		return this;
 	};
@@ -41,10 +45,12 @@ function init(opts) {
 					marker.bindPopup(value);
 				}
 			});
-		});
+			this.status = 'ready';
+			this.vizframe.moduleStatusChanged(this.id);
+		}.bind(this));
 
 		return this;
 	};
 }
 
-module.exports = init;
+module.exports = Dot;

@@ -14,9 +14,9 @@ var dots = $.getJSON('markers.json').then(converters.flatToGeoJSON);
 var municipalities = $.getJSON('finland-municipalities-codes.geojson');
 
 var viz = new VizFrame(document.getElementById('map'), {zoom: 11});
-viz.addModule(new DotChoropleth().setData(traveltimes, 'time').setScale(scale));
+viz.addModule('travel-times', new DotChoropleth().setData(traveltimes, 'time').setScale(scale));
 //viz.addModule(new Heatmap().setData(traveltimes));
-viz.addModule(new Dot({
+viz.addModule('alkos', new Dot({
     popupText: function(point) { 
         var props = point.properties;
         var url = 'http://www.alko.fi' + props.url;

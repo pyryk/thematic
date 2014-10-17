@@ -4,9 +4,13 @@ var L = require('leaflet');
 //var map = vizframe.map;
 var Q = require('q');
 
-function init(opts) {
-	this.isVizFrameModule = true,
-	this.addTo = function(vizframe) {
+function DotChoropleth(opts) {
+	this.isVizFrameModule = true;
+	this.layers = [];
+	this.status = 'loading';
+
+	this.addTo = function(id, vizframe) {
+		this.id = id;
 		this.map = vizframe.map;
 		this.vizframe = vizframe;
 		this.show();
@@ -31,6 +35,9 @@ function init(opts) {
 			var latStep = getStep(dots, 'lat');
 			var lngStep = getStep(dots, 'lng');
 
+			// remove old layers
+			_.each(this.layers, function(it) { map.removeLayer(it); });
+
 			_.map(dots, function(dot) {
 				var northWest = L.latLng(
 						dot.geometry.coordinates[1] - latStep / 2,
@@ -46,10 +53,13 @@ function init(opts) {
 				var rect = L.rectangle(coords.pad(0.01), {color: color, opacity: 0, fillOpacity: 0.5, weight: 1})
 								.bindPopup('Average travel time: ' + value.toFixed(2) + ' min')
 								.addTo(map);
+				this.layers.push(rect);
 			}.bind(this));
 
 			console.log('render took', new Date().getTime() - start, 'ms');
-			this.vizframe.spinner(false);
+			this.status = 'ready';
+			console.log('status changed to', this.status);
+			this.vizframe.moduleStatusChanged(this.id);
 		}.bind(this), function() {
 			console.warn('error handling render', arguments);
 		});
@@ -71,4 +81,4 @@ function getStep(data, type) {
 	return Math.abs((_.last(values) - _.first(values)) / values.length);
 }
 
-module.exports = init;
+module.exports = DotChoropleth;

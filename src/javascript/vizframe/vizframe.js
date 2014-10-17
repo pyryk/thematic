@@ -30,29 +30,46 @@ function init(el, opts) {
 
     var tileOpts = _.omit(opts, 'center', 'zoom', 'tileUrl');
 
-    var map = L.map(el).setView(opts.center, opts.zoom);
-    // 
-    L.tileLayer(opts.tileUrl, tileOpts).addTo(map);
+    this.map = L.map(el).setView(opts.center, opts.zoom);
+    L.tileLayer(opts.tileUrl, tileOpts).addTo(this.map);
 
-    return {
-        map: map,
-        addModule: function(module) {
-            if (!module || !module.isVizFrameModule || typeof module.addTo !== 'function') {
-                throw new Error('module must be a VizFrame module.');
-            }
-            module.addTo(this);
-            return module; // allow chaining
-        },
-        spinner: function(show) { // TODO implement a spinner system that supports multiple modules
-            var hideClass = 'hide';
-            if (show) {
-                spinnerDiv.className = _.filter(spinnerDiv.className.split(' '), function(it) { return it !== hideClass }).join(' ');
-            } else {
-                var classes = spinnerDiv.className.split(' ');
-                classes.push('hide');
-                spinnerDiv.className = classes.join(' ');
-            }
-            
+    var modules = [];
+
+    function modulesReady() {
+        return _.every(modules, function(it) { return it.status === undefined || it.status === 'ready'; });
+    }
+    
+    // public methods ---------------------
+
+    this.addModule = function(id, module) {
+        if (!module || !module.isVizFrameModule || typeof module.addTo !== 'function') {
+            throw new Error('module must be a VizFrame module.');
+        }
+        module.addTo(id, this);
+        modules.push(module);
+        this.moduleStatusChanged(id);
+        return module; // allow chaining
+    };
+
+    this.removeModule = function(id) {
+        // TODO
+    };
+
+    this.moduleStatusChanged = function(id) {
+        console.log('moduleStatusChanged', id, modules);
+        var module = _.find(modules, function(it) { return it.id == id; });
+
+        this.spinner(!modulesReady());
+    };
+
+    this.spinner = function(show) { // TODO implement a spinner system that supports multiple modules
+        var hideClass = 'hide';
+        if (show) {
+            spinnerDiv.className = _.filter(spinnerDiv.className.split(' '), function(it) { return it !== hideClass }).join(' ');
+        } else {
+            var classes = spinnerDiv.className.split(' ');
+            classes.push('hide');
+            spinnerDiv.className = classes.join(' ');
         }
     }
 }
