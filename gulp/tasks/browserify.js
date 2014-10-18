@@ -31,7 +31,9 @@ gulp.task('browserify', function() {
     bundleLogger.start();
 
     return bundler
-      .bundle()
+      .bundle({
+        debug: true
+      })
       // Report compile errors
       .on('error', handleErrors)
       // Use vinyl-source-stream to make the
