@@ -3,6 +3,7 @@ var L = require('leaflet');
 //var vizframe = require('vizframe');
 //var map = vizframe.map;
 var Q = require('q');
+var IModule = require('imodule');
 
 var defaults = {
 	popupText: function(point) {
@@ -16,23 +17,6 @@ function Dot(opts) {
 
 	var opts = _.defaults(opts || {}, defaults);
 
-	this.isVizFrameModule = true;
-	this.status = 'loading';
-
-	this.addTo = function(id, vizframe) {
-		this.vizframe = vizframe;
-		this.map = vizframe.map;
-		this.id = id;
-		this.show();
-		return this;
-	};
-	this.setData = function(data) {
-		this.data = data;
-		return this;
-	};
-	this.setScale = function(scale) {
-			// TODO
-	};
 	this.show = function() {
 		var map = this.map;
 		this.data.then(function(data) {
@@ -52,5 +36,7 @@ function Dot(opts) {
 		return this;
 	};
 }
+
+Dot.prototype = IModule;
 
 module.exports = Dot;

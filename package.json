@@ -13,6 +13,7 @@
     "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
     "d3-contour": "./src/javascript/lib/d3.geom.contour.js",
     "vizframe": "./src/javascript/vizframe/vizframe.js",
+    "imodule": "./src/javascript/vizframe/modules/imodule.js",
     "vizframe-heatmap": "./src/javascript/vizframe/modules/heatmap.js",
     "vizframe-isarithmic": "./src/javascript/vizframe/modules/isarithmic.js",
     "vizframe-contour": "./src/javascript/vizframe/modules/contour.js",

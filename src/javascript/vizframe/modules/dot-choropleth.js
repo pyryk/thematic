@@ -1,32 +1,20 @@
 var _ = require('underscore');
 var L = require('leaflet');
-//var vizframe = require('vizframe');
-//var map = vizframe.map;
 var Q = require('q');
+var IModule = require('imodule');
 
 function DotChoropleth(opts) {
-	this.isVizFrameModule = true;
 	this.layers = [];
-	this.status = 'loading';
 
-	this.addTo = function(id, vizframe) {
-		this.id = id;
-		this.map = vizframe.map;
-		this.vizframe = vizframe;
-		this.show();
-		return this;
-	};
 	this.setData = function(data, field) {
-		this.data = data;
+		IModule.setData.call(this, data);
 		this.field = field;
 		return this;
 	};
-	this.setScale = function(scale) {
-		this.scale = scale;
-		return this;
-	};
+
 	this.show = function() {
 		var map = this.map;
+		this.statusChanged('loading');
 		this.data.then(function(results) {
 			var start = new Date().getTime();
 			var dots = results.features;
@@ -57,16 +45,15 @@ function DotChoropleth(opts) {
 			}.bind(this));
 
 			console.log('render took', new Date().getTime() - start, 'ms');
-			this.status = 'ready';
-			console.log('status changed to', this.status);
-			this.vizframe.moduleStatusChanged(this.id);
-		}.bind(this), function() {
-			console.warn('error handling render', arguments);
-		});
+			this.statusChanged('ready');
+			
+		}.bind(this));
 
 		return this;
 	}
 }
+
+DotChoropleth.prototype = IModule;
 
 function getStep(data, type) {
 	if (type == 'lat') {

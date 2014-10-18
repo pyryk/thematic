@@ -10,12 +10,13 @@ var Q = require('q');
 var _ = require('underscore');
 
 var traveltimes = Q.all([$.getJSON('futu.geojson'), $.getJSON('rajis.geojson')]).then(function(data) { return average(data, 'time'); });
-var dots = $.getJSON('markers.json').then(converters.flatToGeoJSON);
+var dots = $.getJSON('alko-markers.json').then(converters.flatToGeoJSON);
 var municipalities = $.getJSON('finland-municipalities-codes.geojson');
 
 var viz = new VizFrame(document.getElementById('map'), {zoom: 11});
+
 viz.addModule('travel-times', new DotChoropleth().setData(traveltimes, 'time').setScale(scale));
-//viz.addModule(new Heatmap().setData(traveltimes));
+//viz.addModule('travel-times-heatmap', new Heatmap().setData(traveltimes));
 viz.addModule('alkos', new Dot({
     popupText: function(point) { 
         var props = point.properties;
@@ -24,7 +25,7 @@ viz.addModule('alkos', new Dot({
     }
 }).setData(dots));
 
-//viz.addModule(new Choropleth().setData(municipalities));
+//viz.addModule('municipalities', new Choropleth().setData(municipalities));
 
 function scale(value) {
     // todo improve: normalize scales somehow

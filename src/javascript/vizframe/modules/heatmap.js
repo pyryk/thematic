@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var HeatmapOverlay = require('leaflet-heatmap');
 var Q = require('q');
+var IModule = require('imodule');
 
 var defaultConfig = {
 	// radius should be small ONLY if scaleRadius is true (or small radius is intended)
@@ -21,43 +22,39 @@ var defaultConfig = {
 	valueField: 'value'
 };
 
-function create(config) {
+function Heatmap(config) {
 	var config = _.defaults(config || {}, defaultConfig);
-	var heatmap = {
-		isVizFrameModule: true,
-		layer: undefined,
-		addTo: function(vizframe) {
-			this.layer = new HeatmapOverlay(config);
-			this.map = vizframe.map;
-			this.map.addLayer(this.layer);
-			return this;
-		},
-		setData: function(rawData) { // TODO parameterize normalization
-			rawData.then(function(data) {
-				var features = data.features;
-				var average = _.reduce(features, function(memo, it){ return memo + it.properties.time; }, 0) / features.length;
+	this.layer = undefined;
+	this.setData = function(rawData) { // TODO parameterize normalization
+		rawData.then(function(data) {
+			var features = data.features;
+			var average = _.reduce(features, function(memo, it){ return memo + it.properties.time; }, 0) / features.length;
 
-				var data = _.map(features, function(it) {
-					var max = 50;
-					var value = max - Math.min(it.properties.time, max);
+			var data = _.map(features, function(it) {
+				var max = 50;
+				var value = max - Math.min(it.properties.time, max);
 
-					return {lat: it.geometry.coordinates[1], lng: it.geometry.coordinates[0], value: value, every: it.properties.every};
-				});
-				var max = _.max(data, function(it) { return it.time; });
+				return {lat: it.geometry.coordinates[1], lng: it.geometry.coordinates[0], value: value, every: it.properties.every};
+			});
+			var max = _.max(data, function(it) { return it.time; });
 
-				this.layer.setData({
-					max: max.time,
-					data: data
-				});
-			}.bind(this));
-			return this;
-		},
-		show: function() {
-			
+			this.layer.setData({
+				max: max.time,
+				data: data
+			});
+		}.bind(this));
+		return this;
+	};
+	this.show = function() {
+		if (this.layer) {
+			this.map.removeLayer(this.layer);
 		}
-	}
 
-	return heatmap;
+		this.layer = new HeatmapOverlay(config);
+		this.map.addLayer(this.layer);
+	};
 }
 
-module.exports = create;
+Heatmap.prototype = IModule;
+
+module.exports = Heatmap;

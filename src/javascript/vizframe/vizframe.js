@@ -1,7 +1,7 @@
 var L = require('leaflet');
 var _ = require('underscore');
 require('../../../node_modules/leaflet/dist/leaflet.css');
-L.Icon.Default.imagePath = '/images/leaflet/';
+L.Icon.Default.imagePath = 'images/leaflet/';
 
 var defaults = {
     center: [60.199324, 24.941025],
@@ -25,6 +25,28 @@ function init(el, opts) {
     spinnerDiv.appendChild(spinnerImg);
     el.appendChild(spinnerDiv);
 
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message hide';
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'error-text';
+    messageDiv.textContent = 'Error loading content.';
+    errorDiv.appendChild(messageDiv);
+    el.appendChild(errorDiv);
+
+    var info = [
+        {
+            condition: function(modules) { 
+                return _.some(modules, function(it) { return it.status === 'loading'; });
+            },
+            el: spinnerDiv
+        },
+        {
+            condition: function(modules) {
+                return _.some(modules, function(it) { return it.status === 'error'; });
+            },
+            el: errorDiv
+        }
+    ];
 
     opts = _.defaults(opts || {}, defaults);
 
@@ -34,10 +56,6 @@ function init(el, opts) {
     L.tileLayer(opts.tileUrl, tileOpts).addTo(this.map);
 
     var modules = [];
-
-    function modulesReady() {
-        return _.every(modules, function(it) { return it.status === undefined || it.status === 'ready'; });
-    }
     
     // public methods ---------------------
 
@@ -57,21 +75,21 @@ function init(el, opts) {
 
     this.moduleStatusChanged = function(id) {
         console.log('moduleStatusChanged', id, modules);
-        var module = _.find(modules, function(it) { return it.id == id; });
 
-        this.spinner(!modulesReady());
+        _.each(info, function(it) {
+            it.condition(modules) ? removeClass(it.el, 'hide') : addClass(it.el, 'hide'); 
+        });
     };
+}
 
-    this.spinner = function(show) { // TODO implement a spinner system that supports multiple modules
-        var hideClass = 'hide';
-        if (show) {
-            spinnerDiv.className = _.filter(spinnerDiv.className.split(' '), function(it) { return it !== hideClass }).join(' ');
-        } else {
-            var classes = spinnerDiv.className.split(' ');
-            classes.push('hide');
-            spinnerDiv.className = classes.join(' ');
-        }
-    }
+function removeClass(el, className) {
+    el.className = _.filter(el.className.split(' '), function(it) { return it !== className }).join(' ');
+}
+
+function addClass(el, className) {
+    var classes = el.className.split(' ');
+    classes.push(className);
+    el.className = classes.join(' ');
 }
 
 
