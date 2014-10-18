@@ -12,17 +12,17 @@
     "heatmap": "./src/javascript/lib/heatmap.js",
     "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
     "d3-contour": "./src/javascript/lib/d3.geom.contour.js",
-    "vizframe": "./src/javascript/vizframe/vizframe.js",
-    "imodule": "./src/javascript/vizframe/modules/imodule.js",
-    "vizframe-heatmap": "./src/javascript/vizframe/modules/heatmap.js",
-    "vizframe-isarithmic": "./src/javascript/vizframe/modules/isarithmic.js",
-    "vizframe-contour": "./src/javascript/vizframe/modules/contour.js",
-    "vizframe-dot-choropleth": "./src/javascript/vizframe/modules/dot-choropleth.js",
-    "vizframe-dot-choropleth-aggregate": "./src/javascript/vizframe/modules/dot-choropleth-aggregate.js",
-    "vizframe-dot": "./src/javascript/vizframe/modules/dot.js",
-    "vizframe-choropleth": "./src/javascript/vizframe/modules/choropleth.js",
-    "average-aggregator": "./src/javascript/vizframe/utils/average-aggregator.js",
-    "converters": "./src/javascript/vizframe/utils/converters.js"
+    "thematic": "./src/javascript/thematic/thematic.js",
+    "imodule": "./src/javascript/thematic/modules/imodule.js",
+    "thematic-heatmap": "./src/javascript/thematic/modules/heatmap.js",
+    "thematic-isarithmic": "./src/javascript/thematic/modules/isarithmic.js",
+    "thematic-contour": "./src/javascript/thematic/modules/contour.js",
+    "thematic-dot-choropleth": "./src/javascript/thematic/modules/dot-choropleth.js",
+    "thematic-dot-choropleth-aggregate": "./src/javascript/thematic/modules/dot-choropleth-aggregate.js",
+    "thematic-dot": "./src/javascript/thematic/modules/dot.js",
+    "thematic-choropleth": "./src/javascript/thematic/modules/choropleth.js",
+    "average-aggregator": "./src/javascript/thematic/utils/average-aggregator.js",
+    "converters": "./src/javascript/thematic/utils/converters.js"
   },
   "browserify": {
     "transform": [

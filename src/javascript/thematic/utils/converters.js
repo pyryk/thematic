@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 var converters = {
 	/**
-	 * Converts from "flat" JSON format to GeoJSON point FeatureCollection used by VizFrame
+	 * Converts from "flat" JSON format to GeoJSON point FeatureCollection used by Thematic.js.
 	 * Flat input format is a custom format which consists of array of JSON objects. JSON 
 	 * objects contain "latitude" and "longitude" properties and, optionally, other properties.
 	 * Input format example:

@@ -60,8 +60,8 @@ function init(el, opts) {
     // public methods ---------------------
 
     this.addModule = function(id, module) {
-        if (!module || !module.isVizFrameModule || typeof module.addTo !== 'function') {
-            throw new Error('module must be a VizFrame module.');
+        if (!module || !module.isThematicModule || typeof module.addTo !== 'function') {
+            throw new Error('module must be a Thematic.js module.');
         }
         module.addTo(id, this);
         modules.push(module);

@@ -1,8 +1,8 @@
-var VizFrame = require('vizframe');
-var DotChoropleth = require('vizframe-dot-choropleth');
-var Heatmap = require('vizframe-heatmap');
-var Dot = require('vizframe-dot');
-var Choropleth = require('vizframe-choropleth');
+var Thematic = require('thematic');
+var DotChoropleth = require('thematic-dot-choropleth');
+var Heatmap = require('thematic-heatmap');
+var Dot = require('thematic-dot');
+var Choropleth = require('thematic-choropleth');
 var $ = require('jquery');
 var converters = require('converters');
 var average = require('average-aggregator');
@@ -13,11 +13,11 @@ var traveltimes = Q.all([$.getJSON('futu.geojson'), $.getJSON('rajis.geojson')])
 var dots = $.getJSON('alko-markers.json').then(converters.flatToGeoJSON);
 var municipalities = $.getJSON('finland-municipalities-codes.geojson');
 
-var viz = new VizFrame(document.getElementById('map'), {zoom: 11});
+var thematic = new Thematic(document.getElementById('map'), {zoom: 11});
 
-viz.addModule('travel-times', new DotChoropleth().setData(traveltimes, 'time').setScale(scale));
-//viz.addModule('travel-times-heatmap', new Heatmap().setData(traveltimes));
-viz.addModule('alkos', new Dot({
+thematic.addModule('travel-times', new DotChoropleth().setData(traveltimes, 'time').setScale(scale));
+//thematic.addModule('travel-times-heatmap', new Heatmap().setData(traveltimes));
+thematic.addModule('alkos', new Dot({
     popupText: function(point) { 
         var props = point.properties;
         var url = 'http://www.alko.fi' + props.url;
@@ -25,7 +25,7 @@ viz.addModule('alkos', new Dot({
     }
 }).setData(dots));
 
-//viz.addModule('municipalities', new Choropleth().setData(municipalities));
+//thematic.addModule('municipalities', new Choropleth().setData(municipalities));
 
 function scale(value) {
     // todo improve: normalize scales somehow

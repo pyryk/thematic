@@ -1,7 +1,7 @@
 var statuses = ['ready', 'loading', 'error'];
 
 var IModule = {
-	isVizFrameModule: true,
+	isThematicModule: true,
 	status: 'ready', // by default, status is ready (the case of getting data synchronously)
 	scale: function(value) {
 		return value; // identity scale as default
@@ -23,14 +23,14 @@ var IModule = {
 
 		return this;
 	},
-	addTo: function(id, vizframe) {
+	addTo: function(id, thematic) {
 		if (typeof this.show !== 'function') {
-			throw new Error("VizFrame modules must have method show for displaying the data.");
+			throw new Error("Thematic modules must have method show for displaying the data.");
 		}
 
 		this.id = id;
-		this.map = vizframe.map;
-		this.vizframe = vizframe;
+		this.map = thematic.map;
+		this.thematic = thematic;
 		this.show();
 		return this;
 	},
@@ -39,7 +39,7 @@ var IModule = {
 			console.warn('Unsupported status string', status);
 		}
 		this.status = status;
-		this.vizframe.moduleStatusChanged(this.id);
+		this.thematic.moduleStatusChanged(this.id);
 	}
 };
 

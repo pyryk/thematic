@@ -1,7 +1,5 @@
 var _ = require('underscore');
 var L = require('leaflet');
-//var vizframe = require('vizframe');
-//var map = vizframe.map;
 var Q = require('q');
 var IModule = require('imodule');
 
