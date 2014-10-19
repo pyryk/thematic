@@ -7,7 +7,6 @@
     "url": "git://github.com/pyryk/geoviz-framework.git"
   },
   "browser": {
-    "underscore": "backbone/node_modules/underscore",
     "plugin": "./src/javascript/vendor/jquery-plugin.js",
     "heatmap": "./src/javascript/lib/heatmap.js",
     "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
@@ -27,7 +26,6 @@
   "browserify": {
     "transform": [
       "browserify-shim",
-      "coffeeify",
       "cssify"
     ]
   },
@@ -62,7 +60,6 @@
     "browser-sync": "~0.8.2",
     "browserify": "~3.36.0",
     "browserify-shim": "~3.4.1",
-    "coffeeify": "~0.6.0",
     "cssify": "^0.5.1",
     "gulp": "^3.8.0",
     "gulp-changed": "^0.4.1",
@@ -77,11 +74,10 @@
     "watchify": "~0.10.1"
   },
   "dependencies": {
-    "backbone": "~1.1.2",
     "d3": "^3.4.11",
     "jquery": "~2.1.0",
     "leaflet": "^0.7.3",
     "q": "^1.0.1",
-    "turf": "^1.0.0"
+    "underscore": "^1.7.0"
   }
 }

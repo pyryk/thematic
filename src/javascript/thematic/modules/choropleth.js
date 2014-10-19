@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var L = require('leaflet');
-var Q = require('q');
 var IModule = require('imodule');
 
 var defaults = {

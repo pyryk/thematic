@@ -21,7 +21,7 @@ gulp.task('browserify', function() {
     // Specify the entry point of your app
     entries: ['./src/javascript/app.js'],
     // Add file extentions to make optional in your requires
-    extensions: ['.js', '.coffee'],
+    extensions: ['.js'],
     // Enable source maps!
     debug: true
   });

@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var HeatmapOverlay = require('leaflet-heatmap');
-var Q = require('q');
 var IModule = require('imodule');
 
 var defaultConfig = {
