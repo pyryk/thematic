@@ -1,6 +1,8 @@
-var L = require('leaflet');
-var _ = require('underscore');
-require('../../../node_modules/leaflet/dist/leaflet.css');
+var requireOrGlobal = require('require-or-global');
+
+var L = requireOrGlobal('leaflet', 'L');
+var _ = requireOrGlobal('underscore', '_');
+//require('../../../node_modules/leaflet/dist/leaflet.css');
 L.Icon.Default.imagePath = 'images/leaflet/';
 
 var defaults = {

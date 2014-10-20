@@ -21,7 +21,9 @@
     "thematic-dot": "./src/javascript/thematic/modules/dot.js",
     "thematic-choropleth": "./src/javascript/thematic/modules/choropleth.js",
     "average-aggregator": "./src/javascript/thematic/utils/average-aggregator.js",
-    "converters": "./src/javascript/thematic/utils/converters.js"
+    "converters": "./src/javascript/thematic/utils/converters.js",
+    "separate-values-aggregator": "./src/javascript/thematic/utils/separate-values-aggregator.js",
+    "require-or-global": "./src/javascript/thematic/utils/require-or-global.js"
   },
   "browserify": {
     "transform": [
@@ -30,25 +32,6 @@
     ]
   },
   "browserify-shim": {
-    "plugin": {
-      "exports": "plugin",
-      "depends": [
-        "jquery:$"
-      ]
-    },
-    "heatmap": {
-      "exports": "h337",
-      "depends": [
-        "leaflet:L"
-      ]
-    },
-    "leaflet-heatmap": {
-      "exports": "HeatmapOverlay",
-      "depends": [
-        "leaflet:L",
-        "heatmap:h337"
-      ]
-    },
     "d3-contour": {
       "exports": "d3",
       "depends": [

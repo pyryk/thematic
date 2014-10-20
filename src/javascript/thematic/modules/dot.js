@@ -1,5 +1,7 @@
-var _ = require('underscore');
-var L = require('leaflet');
+var requireOrGlobal = require('require-or-global');
+
+var _ = requireOrGlobal('underscore', '_');
+var L = requireOrGlobal('leaflet', 'L');
 var IModule = require('imodule');
 
 var defaults = {

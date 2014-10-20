@@ -1,4 +1,6 @@
-var _ = require('underscore');
+var requireOrGlobal = require('require-or-global');
+
+var _ = requireOrGlobal('underscore', '_');
 var HeatmapOverlay = require('leaflet-heatmap');
 var IModule = require('imodule');
 

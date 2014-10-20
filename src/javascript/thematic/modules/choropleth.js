@@ -1,5 +1,7 @@
-var _ = require('underscore');
-var L = require('leaflet');
+var requireOrGlobal = require('require-or-global');
+
+var _ = requireOrGlobal('underscore', '_');
+var L = requireOrGlobal('leaflet', 'L');
 var IModule = require('imodule');
 
 var defaults = {
@@ -15,6 +17,7 @@ function Choropleth(opts) {
 	var opts = _.defaults(opts || {}, defaults);
 
 	this.show = function() {
+		this.statusChanged('loading');
 		var map = this.map;
 		this.data.then(function(data) {
 
@@ -26,7 +29,8 @@ function Choropleth(opts) {
 					}
 				}
 			}).addTo(map);
-		});
+			this.statusChanged('ready');
+		}.bind(this));
 
 		return this;
 	};

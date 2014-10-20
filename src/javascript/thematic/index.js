@@ -1,21 +1,17 @@
 ;(function() {
-	var vizframe = require('vizframe');
-
-	// window or global
-	var root = this;
-
-	// amd / requirejs
-	if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-		define(function() {
-			return vizframe;
-		});
-	}
-	// commonjs-compatible (node.js, browserify, ...)
-	else if (module && module.exports) {
-			
-	}
-	// browser without modules
-	else {
-		root.vizframe = vizframe;
-	}
+	var thematic = {
+		Thematic: require('thematic'),
+		modules: {
+			'DotChoropleth': require('thematic-dot-choropleth'),
+			'Choropleth': require('thematic-choropleth'),
+			'Dot': require('thematic-dot'),
+			'Heatmap': require('thematic-heatmap')
+		}, 
+		converters: require('converters'),
+		aggregators: {
+			average: require('average-aggregator'),
+			'separate-values': require('separate-values-aggregator')
+		}
+	};
+	window.thematic = thematic;
 })();
