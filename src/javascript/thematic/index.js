@@ -2,7 +2,8 @@
 	var thematic = {
 		Thematic: require('thematic'),
 		modules: {
-			'DotChoropleth': require('thematic-dot-choropleth'),
+			'IModule': require('imodule'),
+			'Dasymetric': require('thematic-dot-choropleth'),
 			'Choropleth': require('thematic-choropleth'),
 			'Dot': require('thematic-dot'),
 			'Heatmap': require('thematic-heatmap')

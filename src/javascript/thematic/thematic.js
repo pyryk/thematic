@@ -3,7 +3,6 @@ var requireOrGlobal = require('require-or-global');
 var L = requireOrGlobal('leaflet', 'L');
 var _ = requireOrGlobal('underscore', '_');
 //require('../../../node_modules/leaflet/dist/leaflet.css');
-L.Icon.Default.imagePath = 'images/leaflet/';
 
 var defaults = {
     center: [60.199324, 24.941025],
@@ -11,7 +10,9 @@ var defaults = {
     maxZoom: 18,
     attribution: 'Maps by OpenStreetMap',
     tms: false,
-    tileUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    tileUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    imagePath: 'images/leaflet/',
+    trackViewport: false
 };
 
 function init(el, opts) {
@@ -20,42 +21,20 @@ function init(el, opts) {
         el = document.getElementById(el);
     }
 
-    var spinnerDiv = document.createElement('div');
-    spinnerDiv.className = 'loading-indicator';
-    var spinnerImg = document.createElement('img');
-    spinnerImg.src = "/images/loading-spin.svg";
-    spinnerDiv.appendChild(spinnerImg);
-    el.appendChild(spinnerDiv);
-
-    var errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message hide';
-    var messageDiv = document.createElement('div');
-    messageDiv.className = 'error-text';
-    messageDiv.textContent = 'Error loading content.';
-    errorDiv.appendChild(messageDiv);
-    el.appendChild(errorDiv);
-
-    var info = [
-        {
-            condition: function(modules) { 
-                return _.some(modules, function(it) { return it.status === 'loading'; });
-            },
-            el: spinnerDiv
-        },
-        {
-            condition: function(modules) {
-                return _.some(modules, function(it) { return it.status === 'error'; });
-            },
-            el: errorDiv
-        }
-    ];
+    addInfoPanels(this, el);
 
     opts = _.defaults(opts || {}, defaults);
 
-    var tileOpts = _.omit(opts, 'center', 'zoom', 'tileUrl');
+    L.Icon.Default.imagePath = opts.imagePath;
+
+    var tileOpts = _.omit(opts, 'center', 'zoom', 'tileUrl', 'imagePath', 'trackViewport');
 
     this.map = L.map(el).setView(opts.center, opts.zoom);
     L.tileLayer(opts.tileUrl, tileOpts).addTo(this.map);
+
+    if (opts.trackViewport) {
+        trackViewport(this, this.map);
+    }
 
     var modules = [];
     
@@ -76,12 +55,72 @@ function init(el, opts) {
     };
 
     this.moduleStatusChanged = function(id) {
-        console.log('moduleStatusChanged', id, modules);
-
-        _.each(info, function(it) {
+        _.each(this.info, function(it) {
             it.condition(modules) ? removeClass(it.el, 'hide') : addClass(it.el, 'hide'); 
         });
     };
+}
+
+function trackViewport(thematic, map) {
+    function setHash(center, zoom) {
+        var hash = '#' + center.lat + ',' + center.lng + '/' + zoom;
+        document.location.hash = hash;
+    }
+
+    function updateLocation() {
+        setHash(map.getCenter(), map.getZoom());
+    }
+
+    function parseLocation(hash) {
+        var re = /([0-9\.]+),([0-9\.]+)\/([0-9]+)/;
+        var parts = hash.match(re)
+        if (parts) {
+            return {center: new L.LatLng(parts[1], parts[2]), zoom: parts[3]};
+        } else {
+            return null;
+        }
+        
+    }
+
+    var location = parseLocation(document.location.hash.substring(1));
+    if (location) {
+        map.setView(location.center, location.zoom);
+    }
+
+    map.on('moveend', updateLocation);
+    map.on('zoomend', updateLocation)
+}
+
+function addInfoPanels(thematic, el) {
+    var spinnerDiv = document.createElement('div');
+    spinnerDiv.className = 'loading-indicator';
+    var spinnerImg = document.createElement('img');
+    spinnerImg.src = "/images/loading-spin.svg";
+    spinnerDiv.appendChild(spinnerImg);
+    el.appendChild(spinnerDiv);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message hide';
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'error-text';
+    messageDiv.textContent = 'Error loading content.';
+    errorDiv.appendChild(messageDiv);
+    el.appendChild(errorDiv);
+
+    thematic.info = [
+        {
+            condition: function(modules) { 
+                return _.some(modules, function(it) { return it.status === 'loading'; });
+            },
+            el: spinnerDiv
+        },
+        {
+            condition: function(modules) {
+                return _.some(modules, function(it) { return it.status === 'error'; });
+            },
+            el: errorDiv
+        }
+    ];
 }
 
 function removeClass(el, className) {

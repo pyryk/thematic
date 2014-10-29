@@ -1,4 +1,5 @@
-var _ = require('underscore');
+var requireOrGlobal = require('require-or-global');
+//var _ = requireOrGlobal('underscore');
 
 var converters = {
 	/**

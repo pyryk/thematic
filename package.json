@@ -23,7 +23,8 @@
     "average-aggregator": "./src/javascript/thematic/utils/average-aggregator.js",
     "converters": "./src/javascript/thematic/utils/converters.js",
     "separate-values-aggregator": "./src/javascript/thematic/utils/separate-values-aggregator.js",
-    "require-or-global": "./src/javascript/thematic/utils/require-or-global.js"
+    "require-or-global": "./src/javascript/thematic/utils/require-or-global.js",
+    "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js"
   },
   "browserify": {
     "transform": [
