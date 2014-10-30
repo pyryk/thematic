@@ -1,5 +1,4 @@
-;(function() {
-	var thematic = {
+module.exports = {
 		Thematic: require('thematic'),
 		modules: {
 			'IModule': require('imodule'),
@@ -14,5 +13,3 @@
 			'separate-values': require('separate-values-aggregator')
 		}
 	};
-	window.thematic = thematic;
-})();

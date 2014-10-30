@@ -1,7 +1,8 @@
-var requireOrGlobal = require('require-or-global');
+var _ = require('underscore');
+_ = window._ || _;
+var L = require('leaflet');
+L = window.L || L;
 
-var _ = requireOrGlobal('underscore', '_');
-var L = requireOrGlobal('leaflet', 'L');
 var IModule = require('imodule');
 
 var defaults = {

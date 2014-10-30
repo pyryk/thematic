@@ -16,34 +16,43 @@ var source       = require('vinyl-source-stream');
 gulp.task('libify', function() {
 
   var production = (process.env.NODE_ENV === 'production');
-  var bundleMethod = global.isWatching ? watchify : browserify;
 
-  var bundler = bundleMethod({
+  var b = browserify({
     // Specify the entry point of your app
-    entries: ['./src/javascript/thematic/index.js'],
+    entries: ['./src/javascript/thematic/global.js'],
     // Add file extentions to make optional in your requires
     extensions: ['.js'],
     // Enable source maps!
-    debug: !production
+    debug: !production,
+    cache: {},
+    packageCache: {},
+    fullPaths: true
   });
+
+  var globalShim = require('browserify-global-shim').configure({
+    'leaflet': 'L'
+  });
+
+  var bundler = global.isWatching ? watchify(b) : b;
 
   var bundle = function() {
     // Log when bundling starts
     bundleLogger.start();
 
     return bundler
-      .exclude('leaflet')
-      .ignore('underscore')
-      .exclude('../../../node_modules/leaflet/dist/leaflet.css')
-      .bundle({
-        debug: !production
-      })
+      //.ignore('leaflet')
+      //.ignore('underscore')
+      .ignore('../../../node_modules/leaflet/dist/leaflet.css')
+      //.ignore('../../lib/MarkerCluster.Default.css')
+      //.ignore('../../lib/MarkerCluster.css')
+      //.transform(globalShim)
+      .bundle()
       // Report compile errors
       .on('error', handleErrors)
       // Use vinyl-source-stream to make the
       // stream gulp compatible. Specifiy the
       // desired output filename here.
-      .pipe(source('index.js'))
+      .pipe(source('global.js'))
       // Specify the output destination
       .pipe(gulp.dest('./build/'))
       // Log when bundling completes!

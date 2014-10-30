@@ -1,6 +1,5 @@
-var requireOrGlobal = require('require-or-global');
-
-var _ = requireOrGlobal('underscore', '_');
+var _ = require('underscore');
+_ = window._ || _;
 
 function getImportance(props) {
 	return typeof props.importance === 'number' ? props.importance : 1;

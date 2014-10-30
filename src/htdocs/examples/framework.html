@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Framework Example</title>
+		<link rel="stylesheet" href="/app.css" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script type="text/javascript" src="/lib/fetch.js"></script>
+		<script type="text/javascript" src="/lib/es6-promise-2.0.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/lib/leaflet/leaflet.css" />
+	</head>
+
+	<body>
+		<div id="map"></div>
+		<script src="/index.js"></script>
+		<script type="text/javascript">
+			(function() {
+				var map = new thematic.Thematic(document.getElementById('map'), {zoom: 11, imagePath: '/images/leaflet'});
+				var dots = fetch('/alko-markers.json').then(function(resp) { return resp.json(); }).then(thematic.converters.flatToGeoJSON);
+
+				map.addModule('alkos', new thematic.modules.Dot({
+				    popupText: function(point) { 
+				        var props = point.properties;
+				        var url = 'http://www.alko.fi' + props.url;
+				        return '<a target="_blank" href="' + url + '">Alko ' + props.name + '</a><br>' + props.address + '<br>' + props.postalCode + ' ' + props.locality; 
+				    }
+				}).setData(dots));
+			})();
+		</script>
+	</body>
+</html>

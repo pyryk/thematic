@@ -13,6 +13,7 @@
     "d3-contour": "./src/javascript/lib/d3.geom.contour.js",
     "thematic": "./src/javascript/thematic/thematic.js",
     "imodule": "./src/javascript/thematic/modules/imodule.js",
+    "index": "./src/javascript/thematic/index.js",
     "thematic-heatmap": "./src/javascript/thematic/modules/heatmap.js",
     "thematic-isarithmic": "./src/javascript/thematic/modules/isarithmic.js",
     "thematic-contour": "./src/javascript/thematic/modules/contour.js",
@@ -23,13 +24,14 @@
     "average-aggregator": "./src/javascript/thematic/utils/average-aggregator.js",
     "converters": "./src/javascript/thematic/utils/converters.js",
     "separate-values-aggregator": "./src/javascript/thematic/utils/separate-values-aggregator.js",
-    "require-or-global": "./src/javascript/thematic/utils/require-or-global.js",
-    "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js"
+    "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js",
+    "leaflet-markercluster-shim": "./src/javascript/thematic/utils/leaflet-markercluster-shim.js"
   },
   "browserify": {
     "transform": [
       "browserify-shim",
-      "cssify"
+      "cssify",
+      "browserify-global-shim"
     ]
   },
   "browserify-shim": {
@@ -38,12 +40,23 @@
       "depends": [
         "d3:d3"
       ]
+    },
+    "leaflet-markercluster": {
+      "depends": [
+        "leaflet:L"
+      ]
+    },
+    "leaflet-heatmap": {
+      "depends": [
+        "leaflet:L"
+      ]
     }
   },
   "devDependencies": {
     "browser-sync": "~0.8.2",
-    "browserify": "~3.36.0",
-    "browserify-shim": "~3.4.1",
+    "browserify": "~6.2.0",
+    "browserify-global-shim": "^1.0.0",
+    "browserify-shim": "~3.8.0",
     "cssify": "^0.5.1",
     "gulp": "^3.8.0",
     "gulp-changed": "^0.4.1",
@@ -55,7 +68,7 @@
     "hbsfy": "~1.3.2",
     "pretty-hrtime": "~0.2.1",
     "vinyl-source-stream": "~0.1.1",
-    "watchify": "~0.10.1"
+    "watchify": "~2.1.0"
   },
   "dependencies": {
     "d3": "^3.4.11",

@@ -1,7 +1,8 @@
-var requireOrGlobal = require('require-or-global');
+var L = require('leaflet');
+L = window.L || L;
 
-var L = requireOrGlobal('leaflet', 'L');
-var _ = requireOrGlobal('underscore', '_');
+var _ = require('underscore');
+_ = window._ || _;
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
 var defaults = {

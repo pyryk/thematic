@@ -1,9 +1,12 @@
-var requireOrGlobal = require('require-or-global');
+var _ = require('underscore');
+_ = window._ || _;
 
-var _ = requireOrGlobal('underscore', '_');
-var L = requireOrGlobal('leaflet', 'L');
+var L = require('leaflet');
+L = window.L || L;
+
+console.log('test 3');
 var IModule = require('imodule');
-require('leaflet-markercluster');
+var MarkerCluster = require('leaflet-markercluster');
 require('../../lib/MarkerCluster.css');
 require('../../lib/MarkerCluster.Default.css');
 
