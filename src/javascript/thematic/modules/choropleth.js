@@ -14,7 +14,6 @@ var defaults = {
 }
 
 function Choropleth(opts) {
-	console.log('init Choropleth');
 	var opts = _.defaults(opts || {}, defaults);
 
 	this.show = function() {
@@ -23,6 +22,11 @@ function Choropleth(opts) {
 		this.data.then(function(data) {
 
 			var area = L.geoJson(data, {
+				style: function(feature) {
+					// TODO parameterize other options
+					var value = feature.properties[opts.field];
+					return {color: this.scale(value), weight: 1, opacity: 0.7, fillOpacity: 0.5};
+				}.bind(this),
 				onEachFeature: function(feature, layer) {
 					var value = typeof opts.popupText === 'function' ? opts.popupText(feature) : opts.popupText;
 					if (value) {

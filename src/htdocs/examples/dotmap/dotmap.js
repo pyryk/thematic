@@ -1,6 +1,6 @@
 (function() {
 	var map = new thematic.Thematic(document.getElementById('map'), {zoom: 11, imagePath: '/images/leaflet'});
-	var dots = fetch('/alko-markers.json').then(function(resp) { return resp.json(); }).then(thematic.converters.flatToGeoJSON);
+	var dots = fetch('alko-markers.json').then(function(resp) { return resp.json(); }).then(thematic.converters.flatToGeoJSON);
 
 	map.addModule('alkos', new thematic.modules.Dot({
 	    popupText: function(point) { 

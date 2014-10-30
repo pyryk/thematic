@@ -10,6 +10,6 @@ module.exports = {
 		converters: require('converters'),
 		aggregators: {
 			average: require('average-aggregator'),
-			'separate-values': require('separate-values-aggregator')
+			separateValues: require('separate-values-aggregator')
 		}
 	};

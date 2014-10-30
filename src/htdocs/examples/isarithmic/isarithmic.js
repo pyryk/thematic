@@ -1,7 +1,10 @@
 (function() {
 	var map = new thematic.Thematic(document.getElementById('map'), {zoom: 11});
 
-	var traveltimes = Promise.all([fetch('/futu.geojson').then(function(resp) { return resp.json(); }), fetch('/rajis.geojson').then(function(resp) { return resp.json(); })]).then(function(data) { return thematic.aggregators.average(data, 'time'); });
+	var traveltimes = Promise.all([
+		fetch('futu.geojson').then(function(resp) { return resp.json(); }), 
+		fetch('rajis.geojson').then(function(resp) { return resp.json(); })
+	]).then(function(data) { return thematic.aggregators.average(data, 'time'); });
 
 	map.addModule('travel-times', new thematic.modules.Dasymetric().setData(traveltimes, 'time').setScale(scale));
 
