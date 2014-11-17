@@ -13,9 +13,9 @@ var gulp         = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
 
-gulp.task('libify', function() {
+gulp.task('libify-min', function() {
 
-  var production = (process.env.NODE_ENV === 'production');
+  var production = true;
 
   var b = browserify({
     // Specify the entry point of your app
@@ -46,13 +46,14 @@ gulp.task('libify', function() {
       //.ignore('../../lib/MarkerCluster.Default.css')
       //.ignore('../../lib/MarkerCluster.css')
       //.transform(globalShim)
+      .transform({global: true}, 'uglifyify')
       .bundle()
       // Report compile errors
       .on('error', handleErrors)
       // Use vinyl-source-stream to make the
       // stream gulp compatible. Specifiy the
       // desired output filename here.
-      .pipe(source('thematic.js'))
+      .pipe(source('thematic.min.js'))
       // Specify the output destination
       .pipe(gulp.dest('./build/'))
       // Log when bundling completes!
