@@ -5,7 +5,8 @@ module.exports = {
 			'Dasymetric': require('thematic-dot-choropleth'),
 			'Choropleth': require('thematic-choropleth'),
 			'Dot': require('thematic-dot'),
-			'Heatmap': require('thematic-heatmap')
+			'Heatmap': require('thematic-heatmap'),
+			'Isarithmic': require('thematic-dot-choropleth')
 		}, 
 		converters: require('converters'),
 		aggregators: {
