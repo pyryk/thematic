@@ -1,19 +1,19 @@
-# geoviz-framework
+# Thematic.js
 
-A framework for visualizing geographical data in the web. This is created as a result of my [master's thesis](https://github.com/pyryk/thesis). Under construction, not suitable for production (or any) use yet.
+A library for visualizing geographical data in the web. This is created as a result of my [master's thesis](https://github.com/pyryk/thesis). Under construction, probably not suitable for production use yet.
 
 ## License
 
-geoviz-framework is licensed under the MIT license (see LICENSE.md for further details).
+Thematic.js is licensed under the MIT license (see LICENSE.md for further details).
 
 ## Contribute
 
-Use the following to start developing geoviz-framework. Node.js, npm, ruby and bundler are needed as prerequisites.
+Use the following to start developing Thematic.js. Node.js, npm, ruby and bundler are needed as prerequisites.
 
 1. Install Gulp: `npm install -g gulp`
 2. Install Sass and Compass: `bundle`
 3. Install npm dependencies: `npm install`
-4. Then, run gulp dev server with `gulp`
+4. Run gulp dev server with `gulp`
 
 ## Thanks
 
