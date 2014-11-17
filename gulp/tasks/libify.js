@@ -26,7 +26,7 @@ gulp.task('libify', function() {
     debug: !production,
     cache: {},
     packageCache: {},
-    fullPaths: true
+    fullPaths: false
   });
 
   var globalShim = require('browserify-global-shim').configure({
