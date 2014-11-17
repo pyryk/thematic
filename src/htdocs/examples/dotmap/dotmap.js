@@ -1,5 +1,7 @@
 (function() {
 	var map = new thematic.Thematic(document.getElementById('map'), {zoom: 11, imagePath: '/images/leaflet'});
+
+	// markers file is randomly generated due to copyright issues
 	var dots = fetch('alko-markers.json').then(function(resp) { return resp.json(); }).then(thematic.converters.flatToGeoJSON);
 
 	map.addModule('alkos', new thematic.modules.Dot({
