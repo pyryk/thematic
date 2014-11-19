@@ -13,7 +13,8 @@ var defaults = {
     tms: false,
     tileUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     imagePath: 'images/leaflet/',
-    trackViewport: false
+    trackViewport: false,
+    appCache: 'confirm' // confirm, auto, false
 };
 
 function init(el, opts) {
@@ -35,6 +36,12 @@ function init(el, opts) {
 
     if (opts.trackViewport) {
         trackViewport(this, this.map);
+    }
+
+    if (opts.appCache === 'confirm') {
+        reloadOnUpdate(true);
+    } else if (opts.appCache == 'auto') {
+        reloadOnUpdate(false);
     }
 
     var modules = [];
@@ -60,6 +67,16 @@ function init(el, opts) {
             it.condition(modules) ? removeClass(it.el, 'hide') : addClass(it.el, 'hide'); 
         });
     };
+}
+
+function reloadOnUpdate(confirmReload) {
+    if (window.applicationCache) {
+      applicationCache.addEventListener('updateready', function() {
+        if (!confirmReload || confirm('An update is available. Reload now?')) {
+          window.location.reload();
+        }
+      });
+    }
 }
 
 function trackViewport(thematic, map) {
