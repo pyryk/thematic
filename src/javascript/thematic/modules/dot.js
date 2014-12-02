@@ -67,6 +67,10 @@ function Dot(opts) {
 
 		return this;
 	};
+
+	this.remove = function() {
+		this.map.removeLayer(markers);
+	}
 }
 
 Dot.prototype = IModule;

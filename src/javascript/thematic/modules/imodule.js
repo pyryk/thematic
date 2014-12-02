@@ -34,6 +34,9 @@ var IModule = {
 		this.show();
 		return this;
 	},
+	remove: function() {
+		throw new Error('Module has not implemented remove method - can\'t remove it');
+	},
 	statusChanged: function(status) {
 		if (statuses.indexOf(status) === -1) {
 			console.warn('Unsupported status string', status);

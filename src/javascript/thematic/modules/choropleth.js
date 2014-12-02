@@ -16,12 +16,14 @@ var defaults = {
 function Choropleth(opts) {
 	var opts = _.defaults(opts || {}, defaults);
 
+	var dataLayer;
+
 	this.show = function() {
 		this.statusChanged('loading');
 		var map = this.map;
 		this.data.then(function(data) {
 
-			var area = L.geoJson(data, {
+			dataLayer = L.geoJson(data, {
 				style: function(feature) {
 					// TODO parameterize other options
 					var value = feature.properties[opts.field];
@@ -39,6 +41,10 @@ function Choropleth(opts) {
 
 		return this;
 	};
+
+	this.remove = function() {
+		this.map.removeLayer(dataLayer);
+	}
 }
 
 Choropleth.prototype = IModule;

@@ -18,7 +18,8 @@ describe("A test suite", function() {
 	});
 
 	it('correctly shows a dot map', function(done) { 
-		var data = thematic.utils.PromisePure([{latitude: 1.234, longitude: 2.345, text: 'Test'}]).then(thematic.converters.flatToGeoJSON);
+		var data = thematic.utils.PromisePure([{latitude: 1.234, longitude: 2.345, text: 'Test'}])
+						.then(thematic.converters.flatToGeoJSON);
 		map.addModule('test', new thematic.modules.Dot({}).setData(data));
 
 		setTimeout(function() {
@@ -39,5 +40,30 @@ describe("A test suite", function() {
 			expect(err.className.indexOf('hide')).to.equal(-1);
 			done();
 		}, 200);
+	});
+
+	it('removes a mapping module', function() { 
+
+		function getLayers(map) {
+			var layers = [];
+			map.map.eachLayer(function(layer) {
+				// hack for filtering out tileLayers
+				if (!layer.options.tileSize) {
+					layers.push(layer); 
+				}
+			});
+			return layers;
+		}
+
+		var data = thematic.utils.PromisePure([{latitude: 1.234, longitude: 2.345, text: 'Test'}])
+						.then(thematic.converters.flatToGeoJSON);
+		map.addModule('test', new thematic.modules.Dot({}).setData(data));
+		expect(map.getModules()).not.to.be.empty;
+		expect(getLayers(map)).not.to.be.empty;
+
+		map.removeModule('test');
+
+		expect(map.getModules()).to.be.empty;
+		expect(getLayers(map)).to.be.empty;
 	});
 });

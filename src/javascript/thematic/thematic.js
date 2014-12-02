@@ -67,8 +67,16 @@ function init(el, opts) {
     };
 
     this.removeModule = function(id) {
-        // TODO
+        var module = _.find(modules, function(it) { return it.id === id; });
+        var i = modules.indexOf(module);
+        modules.splice(i, 1);
+
+        module.remove();
     };
+
+    this.getModules = function() {
+        return _.clone(modules);
+    }
 
     this.moduleStatusChanged = function(id) {
         _.each(this.info, function(it) {
