@@ -21,6 +21,10 @@ var defaults = {
 
 function init(el, opts) {
 
+    if (!el) {
+        throw new Error('Error initializing Thematic - the element is not a DOM element');
+    }
+
     addClass(el, 'thematic-map');
 
     if (typeof el === 'string') {
