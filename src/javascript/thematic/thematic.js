@@ -21,6 +21,8 @@ var defaults = {
 
 function init(el, opts) {
 
+    addClass(el, 'thematic-map');
+
     if (typeof el === 'string') {
         el = document.getElementById(el);
     }
