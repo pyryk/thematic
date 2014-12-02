@@ -2,9 +2,9 @@
 
 A library for visualizing geographical data in the web. This is created as a result of my [master's thesis](https://github.com/pyryk/thesis). Under construction, probably not suitable for production use yet.
 
-## License
+# Usage
 
-Thematic.js is licensed under the MIT license (see LICENSE.md for further details).
+To do.
 
 ## Contribute
 
@@ -14,6 +14,10 @@ Use the following to start developing Thematic.js. Node.js, npm, ruby and bundle
 2. Install Sass and Compass: `bundle`
 3. Install npm dependencies: `npm install`
 4. Run gulp dev server with `gulp`
+
+## License
+
+Thematic.js is licensed under the MIT license (see LICENSE.md for further details).
 
 ## Thanks
 
