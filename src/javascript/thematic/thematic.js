@@ -5,13 +5,15 @@ var _ = require('underscore');
 _ = window._ || _;
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
+polyfillPromises();
+
 var defaults = {
     center: [60.199324, 24.941025],
     zoom: 10,
     maxZoom: 18,
     attribution: 'Maps by OpenStreetMap',
     tms: false,
-    tileUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    tileUrl: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     imagePath: 'images/leaflet/',
     trackViewport: false,
     appCache: 'confirm' // confirm, auto, false
@@ -67,6 +69,13 @@ function init(el, opts) {
             it.condition(modules) ? removeClass(it.el, 'hide') : addClass(it.el, 'hide'); 
         });
     };
+}
+
+// TODO: this may be better done manually when using this library
+function polyfillPromises() {
+    if (!('Promise' in window) && 'ES6Promise' in window) {
+        window.Promise = ES6Promise.Promise;
+    }
 }
 
 function reloadOnUpdate(confirmReload) {
