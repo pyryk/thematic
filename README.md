@@ -2,9 +2,9 @@
 
 A library for visualizing geographical data in the web. This is created as a result of my [master's thesis](https://github.com/pyryk/thesis). Under construction, probably not suitable for production use yet.
 
-# Usage
+## Usage
 
-To do.
+To do. Meanwhile, see [examples](tree/master/src/htdocs/examples), or [JSFiddle](http://jsfiddle.net/pyryk/bf48aq6o/).
 
 ## Contribute
 
