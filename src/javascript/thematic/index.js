@@ -12,5 +12,8 @@ module.exports = {
 		aggregators: {
 			average: require('average-aggregator'),
 			separateValues: require('separate-values-aggregator')
+		},
+		utils: {
+			PromisePure: require('promise-sync')
 		}
 	};

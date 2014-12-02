@@ -24,7 +24,8 @@
     "average-aggregator": "./src/javascript/thematic/utils/average-aggregator.js",
     "converters": "./src/javascript/thematic/utils/converters.js",
     "separate-values-aggregator": "./src/javascript/thematic/utils/separate-values-aggregator.js",
-    "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js"
+    "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js",
+    "promise-sync": "./src/javascript/thematic/utils/promise-sync.js"
   },
   "browserify": {
     "transform": [
