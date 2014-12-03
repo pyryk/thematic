@@ -20,11 +20,11 @@ var defaults = {
 	cluster: true,
 	maxClusterRadius: 50, 
 	showCoverageOnHover: false
-}
+};
 
-function Dot(opts) {
+function Dot(userOpts) {
 
-	var opts = _.defaults(opts || {}, defaults);
+	var opts = _.defaults(userOpts || {}, defaults);
 
 	var clusterOpts = _.omit(opts, 'popupText', 'cluster');
 
@@ -60,7 +60,7 @@ function Dot(opts) {
 				var point = L.latLng(poi.geometry.coordinates[1], poi.geometry.coordinates[0]);
 				var marker = getMarker(point, poi);
 
-				markers.addLayer(marker)
+				markers.addLayer(marker);
 			});
 			this.statusChanged('ready');
 		}.bind(this));
@@ -70,7 +70,7 @@ function Dot(opts) {
 
 	this.remove = function() {
 		this.map.removeLayer(markers);
-	}
+	};
 }
 
 Dot.prototype = IModule;

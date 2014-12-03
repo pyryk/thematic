@@ -11,7 +11,7 @@ var defaultConfig = {
 	// radius should be small ONLY if scaleRadius is true (or small radius is intended)
 	// if scaleRadius is false it will be the constant radius used in pixels
 	"radius": 0.012,
-	"maxOpacity": .6, 
+	"maxOpacity": 0.6, 
 	// scales the radius based on map zoom
 	"scaleRadius": true, 
 	// if set to false the heatmap uses the global maximum for colorization
@@ -26,25 +26,25 @@ var defaultConfig = {
 	valueField: 'value'
 };
 
-function Heatmap(config) {
-	var config = _.defaults(config || {}, defaultConfig);
+function Heatmap(userConfig) {
+	var config = _.defaults(userConfig || {}, defaultConfig);
 	this.layer = undefined;
 	this.setData = function(rawData) { // TODO parameterize normalization
 		rawData.then(function(data) {
 			var features = data.features;
 			var average = _.reduce(features, function(memo, it){ return memo + it.properties.time; }, 0) / features.length;
 
-			var data = _.map(features, function(it) {
+			var points = _.map(features, function(it) {
 				var max = 50;
 				var value = max - Math.min(it.properties.time, max);
 
 				return {lat: it.geometry.coordinates[1], lng: it.geometry.coordinates[0], value: value, every: it.properties.every};
 			});
-			var max = _.max(data, function(it) { return it.time; });
+			var max = _.max(points, function(it) { return it.time; });
 
 			this.layer.setData({
 				max: max.time,
-				data: data
+				data: points
 			});
 		}.bind(this));
 		return this;

@@ -76,11 +76,15 @@ function init(el, opts) {
 
     this.getModules = function() {
         return _.clone(modules);
-    }
+    };
 
     this.moduleStatusChanged = function(id) {
         _.each(this.info, function(it) {
-            it.condition(modules) ? removeClass(it.el, 'hide') : addClass(it.el, 'hide'); 
+            if (it.condition(modules)) {
+                removeClass(it.el, 'hide');
+            } else {
+                addClass(it.el, 'hide');
+            } 
         });
     };
 }
@@ -114,7 +118,7 @@ function trackViewport(thematic, map) {
 
     function parseLocation(hash) {
         var re = /([0-9\.]+),([0-9\.]+)\/([0-9]+)/;
-        var parts = hash.match(re)
+        var parts = hash.match(re);
         if (parts) {
             return {center: new L.LatLng(parts[1], parts[2]), zoom: parts[3]};
         } else {
@@ -129,7 +133,7 @@ function trackViewport(thematic, map) {
     }
 
     map.on('moveend', updateLocation);
-    map.on('zoomend', updateLocation)
+    map.on('zoomend', updateLocation);
 }
 
 function addInfoPanels(thematic, el) {
@@ -165,7 +169,7 @@ function addInfoPanels(thematic, el) {
 }
 
 function removeClass(el, className) {
-    el.className = _.filter(el.className.split(' '), function(it) { return it !== className }).join(' ');
+    el.className = _.filter(el.className.split(' '), function(it) { return it !== className; }).join(' ');
 }
 
 function addClass(el, className) {

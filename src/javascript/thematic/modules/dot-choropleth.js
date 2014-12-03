@@ -52,18 +52,19 @@ function DotChoropleth(opts) {
 		}.bind(this));
 
 		return this;
-	}
+	};
 }
 
 DotChoropleth.prototype = IModule;
 
 function getStep(data, type) {
+	var index, isSorted;
 	if (type == 'lat') {
-		var index = 1;
-		var isSorted = true;
+		index = 1;
+		isSorted = true;
 	} else {
-		var index = 0;
-		var isSorted = false;
+		index = 0;
+		isSorted = false;
 	}
 
 	var values = _.chain(data).map(function(it) { return it.geometry.coordinates[index]; }).uniq(isSorted).value();

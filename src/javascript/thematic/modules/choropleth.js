@@ -11,10 +11,10 @@ var defaults = {
 			return key + ": " + value;
 		}).value().join("<br />");
 	}
-}
+};
 
-function Choropleth(opts) {
-	var opts = _.defaults(opts || {}, defaults);
+function Choropleth(userOpts) {
+	var opts = _.defaults(userOpts || {}, defaults);
 
 	var dataLayer;
 
@@ -44,7 +44,7 @@ function Choropleth(opts) {
 
 	this.remove = function() {
 		this.map.removeLayer(dataLayer);
-	}
+	};
 }
 
 Choropleth.prototype = IModule;

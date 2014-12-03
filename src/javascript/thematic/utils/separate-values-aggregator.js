@@ -13,7 +13,7 @@ function aggregate(idField, valueField) {
 		});
 
 		return withExtras;
-	}
+	};
 }
 
 
