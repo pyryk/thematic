@@ -107,6 +107,13 @@ function reloadOnUpdate(confirmReload) {
 }
 
 function trackViewport(thematic, map) {
+    window.addEventListener('hashchange', function() {
+        var location = parseLocation(document.location.hash.substring(1));
+        if (location) {
+            map.setView(location.center, location.zoom);
+        }
+    });
+
     function setHash(center, zoom) {
         var hash = '#' + center.lat + ',' + center.lng + '/' + zoom;
         document.location.hash = hash;
