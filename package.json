@@ -2,6 +2,7 @@
   "name": "geoviz-framework",
   "version": "0.0.1",
   "description": "A framework for visualizing geographical data on the web.",
+  "main": "index",
   "repository": {
     "type": "git",
     "url": "git://github.com/pyryk/geoviz-framework.git"
@@ -35,12 +36,6 @@
     ]
   },
   "browserify-shim": {
-    "d3-contour": {
-      "exports": "d3",
-      "depends": [
-        "d3:d3"
-      ]
-    },
     "leaflet-markercluster": {
       "depends": [
         "leaflet:L"
