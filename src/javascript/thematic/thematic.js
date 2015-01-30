@@ -3,6 +3,9 @@ L = window.L || L;
 
 var _ = require('underscore');
 _ = window._ || _;
+
+require('./utils/polyfills');
+
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
 polyfillPromises();
