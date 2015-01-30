@@ -8,8 +8,6 @@ require('./utils/polyfills');
 
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
-polyfillPromises();
-
 var defaults = {
     center: [60.199324, 24.941025],
     zoom: 10,
@@ -90,13 +88,6 @@ function init(el, opts) {
             } 
         });
     };
-}
-
-// TODO: this may be better done manually when using this library
-function polyfillPromises() {
-    if (!('Promise' in window) && 'ES6Promise' in window) {
-        window.Promise = ES6Promise.Promise;
-    }
 }
 
 function reloadOnUpdate(confirmReload) {
