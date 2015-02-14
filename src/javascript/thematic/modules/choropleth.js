@@ -1,5 +1,5 @@
-var _ = require('underscore', '_');
-var L = require('leaflet', 'L');
+var _ = require('lodash');
+var L = require('leaflet');
 
 var IModule = require('imodule');
 
