@@ -768,7 +768,7 @@
 	var map = new thematic.Thematic(document.getElementById('map'), {
 		center: [60.999324, 24.941025], 
 		zoom: 7, 
-		imagePath: '/images/leaflet'
+		imagePath: '/images'
 	});
 
 	// wrap the synchronous data in a Promise and convert it to geojson format

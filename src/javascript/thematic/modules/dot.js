@@ -6,8 +6,6 @@ L = window.L || L;
 
 var IModule = require('imodule');
 var MarkerCluster = require('leaflet-markercluster');
-require('../../lib/MarkerCluster.css');
-require('../../lib/MarkerCluster.Default.css');
 
 var defaults = {
 	type: 'dot', // 

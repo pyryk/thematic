@@ -1,5 +1,5 @@
 module.exports = {
-		Thematic: require('thematic'),
+		Thematic: require('./thematic'),
 		modules: {
 			'IModule': require('imodule'),
 			'Dasymetric': require('thematic-dot-choropleth'),

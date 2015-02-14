@@ -19,14 +19,15 @@ gulp.task('libify', function() {
 
   var b = browserify({
     // Specify the entry point of your app
-    entries: ['./src/javascript/thematic/global.js'],
+    entries: ['./src/javascript/thematic/index.js'],
     // Add file extentions to make optional in your requires
     extensions: ['.js'],
     // Enable source maps!
     debug: !production,
     cache: {},
     packageCache: {},
-    fullPaths: false
+    fullPaths: false,
+    standalone: 'thematic'
   });
 
   var globalShim = require('browserify-global-shim').configure({

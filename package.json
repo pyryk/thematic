@@ -1,17 +1,15 @@
 {
-  "name": "geoviz-framework",
+  "name": "thematic",
   "version": "0.0.1",
   "description": "A framework for visualizing geographical data on the web.",
-  "main": "index",
+  "main": "build/thematic.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pyryk/geoviz-framework.git"
+    "url": "git://github.com/pyryk/thematic.git"
   },
   "browser": {
-    "plugin": "./src/javascript/vendor/jquery-plugin.js",
     "heatmap": "./src/javascript/lib/heatmap.js",
     "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
-    "d3-contour": "./src/javascript/lib/d3.geom.contour.js",
     "thematic": "./src/javascript/thematic/thematic.js",
     "imodule": "./src/javascript/thematic/modules/imodule.js",
     "index": "./src/javascript/thematic/index.js",
@@ -26,7 +24,8 @@
     "converters": "./src/javascript/thematic/utils/converters.js",
     "separate-values-aggregator": "./src/javascript/thematic/utils/separate-values-aggregator.js",
     "leaflet-markercluster": "./src/javascript/lib/leaflet.markercluster.js",
-    "promise-sync": "./src/javascript/thematic/utils/promise-sync.js"
+    "promise-sync": "./src/javascript/thematic/utils/promise-sync.js",
+    "polyfills": "./src/javascript/thematic/utils/polyfills.js"
   },
   "browserify": {
     "transform": [
@@ -80,6 +79,7 @@
   },
   "dependencies": {
     "es6-promise": "^2.0.1",
+    "geojson-coords": "0.0.0",
     "leaflet": "^0.7.3",
     "underscore": "^1.7.0",
     "whatwg-fetch": "^0.7.0"

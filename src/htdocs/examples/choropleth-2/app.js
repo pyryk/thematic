@@ -4,7 +4,7 @@
 	var map = new thematic.Thematic(document.getElementById('map'), {
 		center: [65.199324, 24.941025], 
 		zoom: 6, 
-		imagePath: '/images/leaflet'
+		imagePath: '/images'
 	});
 
 	// fetch the data and modify it to better suit the choropleth module

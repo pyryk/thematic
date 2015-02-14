@@ -1,7 +1,14 @@
-var _ = require('underscore');
-_ = window._ || _;
-var L = require('leaflet');
-L = window.L || L;
+function globalOrRequire(name, globalName) {
+	var globalObject = globalName ? window[globalName] : window[name];
+	if (globalObject !== undefined) {
+		return globalObject;
+	} else {
+		return require(name); 
+	}
+}
+
+var _ = globalOrRequire('underscore', '_');
+var L = globalOrRequire('leaflet', 'L');
 
 var IModule = require('imodule');
 

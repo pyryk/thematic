@@ -6,9 +6,7 @@
 
 	// initialize the map
 	var map = new thematic.Thematic(document.getElementById('map'), {
-		zoom: 7, 
-		imagePath: '/images/leaflet', 
-		center: [36.778261, -119.417932]
+		imagePath: '/images'
 	});
 
 	// fetch the data and convert it to GeoJSON

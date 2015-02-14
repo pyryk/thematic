@@ -4,7 +4,7 @@ L = window.L || L;
 var _ = require('underscore');
 _ = window._ || _;
 
-require('./utils/polyfills');
+require('polyfills');
 
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
@@ -15,7 +15,7 @@ var defaults = {
     attribution: 'Maps by OpenStreetMap',
     tms: false,
     tileUrl: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    imagePath: 'images/leaflet/',
+    imagePath: 'images/',
     trackViewport: false,
     appCache: 'confirm' // confirm, auto, false
 };
@@ -32,11 +32,10 @@ function init(el, opts) {
         el = document.getElementById(el);
     }
 
-    addInfoPanels(this, el);
-
     opts = _.defaults(opts || {}, defaults);
+    L.Icon.Default.imagePath = opts.imagePath + '/leaflet/';
 
-    L.Icon.Default.imagePath = opts.imagePath;
+    addInfoPanels(this, el, opts);
 
     var tileOpts = _.omit(opts, 'center', 'zoom', 'tileUrl', 'imagePath', 'trackViewport');
 
@@ -137,11 +136,11 @@ function trackViewport(thematic, map) {
     map.on('zoomend', updateLocation);
 }
 
-function addInfoPanels(thematic, el) {
+function addInfoPanels(thematic, el, opts) {
     var spinnerDiv = document.createElement('div');
     spinnerDiv.className = 'loading-indicator';
     var spinnerImg = document.createElement('img');
-    spinnerImg.src = "/images/loading-spin.svg";
+    spinnerImg.src = opts.imagePath + "/loading-spin.svg";
     spinnerDiv.appendChild(spinnerImg);
     el.appendChild(spinnerDiv);
 

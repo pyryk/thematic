@@ -3,7 +3,7 @@
 	// create the map component
 	var map = new thematic.Thematic(document.getElementById('map'), {
 		zoom: 11, 
-		imagePath: '/images/leaflet'
+		imagePath: '/images'
 	});
 
 	// fetch the data
