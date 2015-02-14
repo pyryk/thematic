@@ -1,6 +1,7 @@
 .DS_Store
 .sass-cache
-build
 Desktop.ini
 node_modules
 bower_components
+build/examples/
+build/index.html
