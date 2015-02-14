@@ -1,8 +1,6 @@
-var _ = require('underscore');
-_ = window._ || _;
+var _ = require('lodash');
 
 var L = require('leaflet');
-L = window.L || L;
 
 var IModule = require('imodule');
 var MarkerCluster = require('leaflet-markercluster');
