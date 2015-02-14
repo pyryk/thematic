@@ -17,14 +17,15 @@ var defaults = {
 	},
 	cluster: true,
 	maxClusterRadius: 50, 
-	showCoverageOnHover: false
+	showCoverageOnHover: false,
+	fitToData: true
 };
 
 function Dot(userOpts) {
 
 	var opts = _.defaults(userOpts || {}, defaults);
 
-	var clusterOpts = _.omit(opts, 'popupText', 'cluster');
+	var clusterOpts = _.omit(opts, 'popupText', 'cluster', 'fitToData');
 
 	var markers = opts.cluster ? new L.MarkerClusterGroup(clusterOpts) : L.layerGroup();
 
@@ -60,6 +61,11 @@ function Dot(userOpts) {
 
 				markers.addLayer(marker);
 			});
+
+			if (opts.fitToData) {
+				this.thematic.fitToData(data);
+			}
+
 			this.statusChanged('ready');
 		}.bind(this));
 

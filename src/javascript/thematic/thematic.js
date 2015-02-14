@@ -6,11 +6,13 @@ _ = window._ || _;
 
 require('polyfills');
 
+var geoJsonCoords = require('geojson-coords');
+
 //require('../../../node_modules/leaflet/dist/leaflet.css');
 
 var defaults = {
-    center: [60.199324, 24.941025],
-    zoom: 10,
+    center: [0, 0],
+    zoom: 15,
     maxZoom: 18,
     attribution: 'Maps by OpenStreetMap',
     tms: false,
@@ -87,6 +89,23 @@ function init(el, opts) {
             } 
         });
     };
+
+    this.fitToData = function(geojson, force) {
+
+        // only fit if force == true or not tracking viewport
+        if (force || !(opts.trackViewport && document.location.hash.substring(1).length > 0)) {
+            this.map.fitBounds(getLatLngBounds(geojson));
+        }
+    };
+}
+
+function getLatLngBounds(geojson) {
+    var coords = geoJsonCoords(geojson);
+    var points = _.map(coords, function(point) {
+        return L.latLng(point[1], point[0]);
+    });
+
+    return L.latLngBounds(points);
 }
 
 function reloadOnUpdate(confirmReload) {

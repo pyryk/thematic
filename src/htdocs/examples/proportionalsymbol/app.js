@@ -16,10 +16,11 @@
 
 	// add the mapping module with id 'quakes'. Notice that proportional symbol
 	// maps are achieved with the Dot mapping module by specifying the type
-	// 'proportional'. Clustering support is disabled, since reduces the
+	// 'proportional'. Clustering support is disabled, since it reduces the
 	// information shown greatly in proportional symbol maps.
 	map.addModule('quakes', new thematic.modules.Dot({
 		    cluster: false,
+		    fitToData: true,
 
 		    // enable proportional symbol mode
 		    type: 'proportional',

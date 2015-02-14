@@ -17,7 +17,8 @@ var defaults = {
 		return _.chain(point.properties).map(function(value, key) {
 			return key + ": " + value;
 		}).value().join("<br />");
-	}
+	},
+	fitToData: true
 };
 
 function Choropleth(userOpts) {
@@ -43,6 +44,11 @@ function Choropleth(userOpts) {
 					}
 				}
 			}).addTo(map);
+
+			if (opts.fitToData) {
+				this.thematic.fitToData(data);
+			}
+
 			this.statusChanged('ready');
 		}.bind(this));
 

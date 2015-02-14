@@ -46,7 +46,13 @@ function DotChoropleth(opts) {
 				this.layers.push(rect);
 			}.bind(this));
 
-			console.log('render took', new Date().getTime() - start, 'ms');
+			console.log(this.thematic);
+			if (opts.fitToData) {
+				console.log(this, this.thematic);
+				this.thematic.fitToData(results);
+			}
+
+			console.log('render took!!', new Date().getTime() - start, 'ms');
 			this.statusChanged('ready');
 			
 		}.bind(this));
