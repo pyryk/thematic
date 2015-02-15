@@ -6,6 +6,8 @@ A library for visualizing geographical data in the web. This is created as a res
 
 To do. Meanwhile, see [examples](tree/master/src/htdocs/examples), or [JSFiddle](http://jsfiddle.net/pyryk/bf48aq6o/).
 
+For browserify use, take a look at [thematic-example](https://github.com/pyryk/thematic-example) example project. You'll see that using Thematic.js is really straightforward.
+
 ## Contribute
 
 Use the following to start developing Thematic.js. Node.js and npm are needed as prerequisites.
