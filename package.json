@@ -2,7 +2,7 @@
   "name": "thematic",
   "version": "0.0.1",
   "description": "A framework for visualizing geographical data on the web.",
-  "main": "build/thematic.js",
+  "main": "src/javascript/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/pyryk/thematic.git"
