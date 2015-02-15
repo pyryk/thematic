@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 /**
  * Combines GeoJSON data such as Country borders with other data such as population density for each country.
  * 

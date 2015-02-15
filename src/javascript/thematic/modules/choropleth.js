@@ -1,14 +1,5 @@
-function globalOrRequire(name, globalName) {
-	var globalObject = globalName ? window[globalName] : window[name];
-	if (globalObject !== undefined) {
-		return globalObject;
-	} else {
-		return require(name); 
-	}
-}
-
-var _ = globalOrRequire('underscore', '_');
-var L = globalOrRequire('leaflet', 'L');
+var _ = require('lodash');
+var L = require('leaflet');
 
 var IModule = require('imodule');
 

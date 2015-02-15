@@ -29,10 +29,6 @@ gulp.task('libify-min', function() {
     fullPaths: false
   });
 
-  var globalShim = require('browserify-global-shim').configure({
-    'leaflet': 'L'
-  });
-
   var bundler = global.isWatching ? watchify(b) : b;
 
   var bundle = function() {
@@ -42,9 +38,6 @@ gulp.task('libify-min', function() {
     return bundler
       //.ignore('leaflet')
       //.ignore('underscore')
-      .ignore('../../../node_modules/leaflet/dist/leaflet.css')
-      //.ignore('../../lib/MarkerCluster.Default.css')
-      //.ignore('../../lib/MarkerCluster.css')
       //.transform(globalShim)
       .transform({global: true}, 'uglifyify')
       .bundle()

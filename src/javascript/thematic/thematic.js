@@ -1,8 +1,6 @@
 var L = require('leaflet');
-L = window.L || L;
 
-var _ = require('underscore');
-_ = window._ || _;
+var _ = require('lodash');
 
 require('polyfills');
 

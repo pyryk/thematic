@@ -30,10 +30,6 @@ gulp.task('libify', function() {
     standalone: 'thematic'
   });
 
-  var globalShim = require('browserify-global-shim').configure({
-    'leaflet': 'L'
-  });
-
   var bundler = global.isWatching ? watchify(b) : b;
 
   var bundle = function() {
@@ -43,9 +39,6 @@ gulp.task('libify', function() {
     return bundler
       //.ignore('leaflet')
       //.ignore('underscore')
-      .ignore('../../../node_modules/leaflet/dist/leaflet.css')
-      //.ignore('../../lib/MarkerCluster.Default.css')
-      //.ignore('../../lib/MarkerCluster.css')
       //.transform(globalShim)
       .bundle()
       // Report compile errors
