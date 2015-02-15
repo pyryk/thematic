@@ -10,7 +10,7 @@
   "browser": {
     "heatmap": "./src/javascript/lib/heatmap.js",
     "leaflet-heatmap": "./src/javascript/lib/leaflet-heatmap.js",
-    "thematic": "./src/javascript/thematic/thematic.js",
+    "thematic-main": "./src/javascript/thematic/thematic.js",
     "imodule": "./src/javascript/thematic/modules/imodule.js",
     "index": "./src/javascript/thematic/index.js",
     "thematic-heatmap": "./src/javascript/thematic/modules/heatmap.js",
