@@ -8,7 +8,7 @@
 
 	// fetch the data
 	// markers file is randomly generated due to copyright issues
-	var dots = fetch('alko-markers-real.json')
+	var dots = fetch('alko-markers.json')
 		.then(function(resp) { return resp.json(); })
 		.then(thematic.converters.flatToGeoJSON); // convert the data from the flat dot format to geojson
 
