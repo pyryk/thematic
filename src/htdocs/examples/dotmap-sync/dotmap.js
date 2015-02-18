@@ -1,4 +1,6 @@
 (function() {
+
+	// define the data locally
 	var data = [
 		{
 			"storeId": 2200,
@@ -762,16 +764,24 @@
 		}
 	];
 
-	var map = new thematic.Thematic(document.getElementById('map'), {center: [60.999324, 24.941025], zoom: 7, imagePath: '/images/leaflet'});
+	// init the map component
+	var map = new thematic.Thematic(document.getElementById('map'), {
+		center: [60.999324, 24.941025], 
+		zoom: 7, 
+		imagePath: '/images'
+	});
 
-	// markers file is randomly generated due to copyright issues
+	// wrap the synchronous data in a Promise and convert it to geojson format
 	var dots = thematic.utils.PromisePure(data).then(thematic.converters.flatToGeoJSON);
+
+	// init the dot map module and add it to the map
 	map.addModule('alkos', new thematic.modules.Dot({
+			// customize the popup
 			popupText: function(point) { 
 					var props = point.properties;
 					var url = 'http://www.alko.fi' + props.url;
 					return '<a target="_blank" href="' + url + '">Alko ' + props.name + '</a><br>' + props.address + '<br>' + props.postalCode + ' ' + props.locality; 
 			}
-	}).setData(dots));	
+	}).setData(dots)); // set the data to the module
 	
 })();

@@ -1,13 +1,9 @@
-var _ = require('underscore');
-_ = window._ || _;
+var _ = require('lodash');
 
 var L = require('leaflet');
-L = window.L || L;
 
 var IModule = require('imodule');
 var MarkerCluster = require('leaflet-markercluster');
-require('../../lib/MarkerCluster.css');
-require('../../lib/MarkerCluster.Default.css');
 
 var defaults = {
 	type: 'dot', // 

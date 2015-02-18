@@ -1,11 +1,10 @@
 var L = require('leaflet');
-L = window.L || L;
 
-var _ = require('underscore');
-_ = window._ || _;
+var _ = require('lodash');
+
+require('polyfills');
+
 //require('../../../node_modules/leaflet/dist/leaflet.css');
-
-polyfillPromises();
 
 var defaults = {
     center: [60.199324, 24.941025],
@@ -14,7 +13,7 @@ var defaults = {
     attribution: 'Maps by OpenStreetMap',
     tms: false,
     tileUrl: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    imagePath: 'images/leaflet/',
+    imagePath: 'images/',
     trackViewport: false,
     appCache: 'confirm' // confirm, auto, false
 };
@@ -31,11 +30,10 @@ function init(el, opts) {
         el = document.getElementById(el);
     }
 
-    addInfoPanels(this, el);
-
     opts = _.defaults(opts || {}, defaults);
+    L.Icon.Default.imagePath = opts.imagePath + '/leaflet/';
 
-    L.Icon.Default.imagePath = opts.imagePath;
+    addInfoPanels(this, el, opts);
 
     var tileOpts = _.omit(opts, 'center', 'zoom', 'tileUrl', 'imagePath', 'trackViewport');
 
@@ -89,13 +87,6 @@ function init(el, opts) {
     };
 }
 
-// TODO: this may be better done manually when using this library
-function polyfillPromises() {
-    if (!('Promise' in window) && 'ES6Promise' in window) {
-        window.Promise = ES6Promise.Promise;
-    }
-}
-
 function reloadOnUpdate(confirmReload) {
     if (window.applicationCache) {
       applicationCache.addEventListener('updateready', function() {
@@ -143,11 +134,11 @@ function trackViewport(thematic, map) {
     map.on('zoomend', updateLocation);
 }
 
-function addInfoPanels(thematic, el) {
+function addInfoPanels(thematic, el, opts) {
     var spinnerDiv = document.createElement('div');
     spinnerDiv.className = 'loading-indicator';
     var spinnerImg = document.createElement('img');
-    spinnerImg.src = "/images/loading-spin.svg";
+    spinnerImg.src = opts.imagePath + "/loading-spin.svg";
     spinnerDiv.appendChild(spinnerImg);
     el.appendChild(spinnerDiv);
 

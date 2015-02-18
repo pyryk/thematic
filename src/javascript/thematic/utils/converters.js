@@ -1,5 +1,4 @@
-var _ = require('underscore', '_');
-_ = window._ || _;
+var _ = require('lodash');
 
 var converters = {
 	/**

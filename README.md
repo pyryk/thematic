@@ -6,14 +6,18 @@ A library for visualizing geographical data in the web. This is created as a res
 
 To do. Meanwhile, see [examples](tree/master/src/htdocs/examples), or [JSFiddle](http://jsfiddle.net/pyryk/bf48aq6o/).
 
+When using npm/browserify, using thematic.js is as simple as running `npm install -S thematic` and adding `var thematic = require('thematic');` in your code.
+
+For browserify use in more detail, take a look at [thematic-example](https://github.com/pyryk/thematic-example) example project. You'll see that using Thematic.js is really straightforward.
+
 ## Contribute
 
-Use the following to start developing Thematic.js. Node.js, npm, ruby and bundler are needed as prerequisites.
+Use the following to start developing Thematic.js. Node.js and npm are needed as prerequisites.
 
 1. Install Gulp: `npm install -g gulp`
-2. Install Sass and Compass: `bundle`
-3. Install npm dependencies: `npm install`
-4. Run gulp dev server with `gulp`
+2. Install npm dependencies: `npm install`
+3. Run gulp dev server with `gulp`
+4. Locate to [http://localhost:3000](http://localhost:3000)
 
 ## License
 
@@ -21,4 +25,8 @@ Thematic.js is licensed under the MIT license (see LICENSE.md for further detail
 
 ## Thanks
 
+Thematic.js is based on several open source libraries, including [Leaflet](http://leafletjs.com), [heatmap.js](http://www.patrick-wied.at/static/heatmapjs/) and [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster).
+
 The build system configuration and structure are based on [gulp-starter](https://github.com/greypants/gulp-starter) by [Dan Tello](https://github.com/greypants), licensed under the MIT license (see LICENSE.md for further details).
+
+This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).

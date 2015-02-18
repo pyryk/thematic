@@ -1,3 +1,3 @@
 ;(function() {
-	window.thematic = require('index');
+	window.thematic = require('./index');
 })();

@@ -14,10 +14,6 @@ var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
 
 gulp.task('browserify', ['jshint'], function() {
-  /*var globalShim = require('browserify-global-shim').configure({
-    'leaflet': 'L',
-    'underscore': '_'
-  });*/
 
   var b = browserify({
     // Specify the entry point of your app
